@@ -35,12 +35,11 @@ def get_data(city: str, nct_id: str, PHPSESSID: str) -> List[dict]:
         )
         
         response = response.json()
-
         json_data["nextdocid"] = response.get("nextdocid")
 
         if response.get("results"):
-            for item in response.get("results")["data"]:
-                if item[0] != 'null':
+            for item in response.get("results").get("data"):
+                if len(item) and item[0] != 'null':
                     pprint.pprint(item)
                     tmp = {}
                     tmp["name"] = item[1]
